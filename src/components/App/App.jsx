@@ -1,55 +1,27 @@
-import { Component } from "react";
+import { useContext } from "react";
 import MainPage from "../_pages/MainPage";
 import TransactionPage from "../_pages/TransactionPage";
 import BalancePage from "../_pages/BalancePage";
+import TransactionHistoryPage from "../_pages/TransactionHistoryPage";
+import { BaseContext } from "../BaseProvider/BaseProvider";
 
-class App extends Component {
-  state = {
-    activePage: "",
-    costs: [],
-    incomes: [],
-  };
+const App = () => {
+  const { activePage } = useContext(BaseContext);
 
-  toggleActivePage = (activePage = "") => {
-    this.setState({ activePage });
-  };
-
-  addTransaction = ({ transaction, transType }) => {
-    this.setState((prevState) => ({
-      [transType]: [...prevState[transType], transaction],
-    }));
-  };
-
-  render() {
-    const { activePage, incomes, costs } = this.state;
-    switch (activePage) {
-      case "costs":
-        return (
-          <TransactionPage
-            closeActivePage={this.toggleActivePage}
-            transType={activePage}
-            addTransaction={this.addTransaction}
-          />
-        );
-      case "incomes":
-        return (
-          <TransactionPage
-            closeActivePage={this.toggleActivePage}
-            transType={activePage}
-            addTransaction={this.addTransaction}
-          />
-        );
-      case "balance":
-        return (
-          <BalancePage
-            transactions={[...costs, ...incomes]}
-            closeActivePage={this.toggleActivePage}
-          />
-        );
-      default:
-        return <MainPage openActivePage={this.toggleActivePage} />;
-    }
+  switch (activePage) {
+    case "costs":
+      return <TransactionPage />;
+    case "incomes":
+      return <TransactionPage />;
+    case "balance":
+      return <BalancePage />;
+    case "costsHistory":
+      return <TransactionHistoryPage />;
+    case "incomesHistory":
+      return <TransactionHistoryPage />;
+    default:
+      return <MainPage />;
   }
-}
+};
 
 export default App;

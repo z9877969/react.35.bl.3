@@ -1,4 +1,4 @@
-const GoBackHeader = ({ title, handleGoBack }) => {
+const GoBackHeader = ({ title, handleGoBack, children }) => {
   const cbOnClick = () => handleGoBack();
 
   return (
@@ -6,7 +6,7 @@ const GoBackHeader = ({ title, handleGoBack }) => {
       <button onClick={cbOnClick} type="button">
         GoBack
       </button>
-      <h1>{title}</h1>
+      {title ? <h1>{title}</h1> : children}
     </header>
   );
 };

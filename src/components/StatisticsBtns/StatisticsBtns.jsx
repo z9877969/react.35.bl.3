@@ -1,8 +1,12 @@
-const StatisticsBtns = () => {
+const StatisticsBtns = ({ openActivePage }) => {
   return (
     <>
-      <button type="button">Все расходы</button>
-      <button type="button">Все доходы</button>
+      <button onClick={() => openActivePage("costsHistory")} type="button">
+        Все расходы
+      </button>
+      <button onClick={() => openActivePage("incomesHistory")} type="button">
+        Все доходы
+      </button>
     </>
   );
 };

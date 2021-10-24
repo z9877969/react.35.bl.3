@@ -1,34 +1,37 @@
+import { useContext } from "react";
 import MainInfo from "../MainInfo/MainInfo";
 import StatisticsBtns from "../StatisticsBtns/StatisticsBtns";
+import { BaseContext } from "../BaseProvider/BaseProvider";
 import {
   mainInfoCosts,
   mainInfoIncomes,
   mainInfoBalance,
 } from "../../assets/data/mainInfoOptions.json";
 
-const MainPage = ({ openActivePage }) => {
+const MainPage = () => {
+  const { toggleActivePage } = useContext(BaseContext);
   return (
     <section>
       <h1>Журнал расходов</h1>
       <MainInfo
-        openActivePage={openActivePage}
+        openActivePage={toggleActivePage}
         options={mainInfoCosts}
         title="Расходы"
         activePage="costs"
       />
       <MainInfo
-        openActivePage={openActivePage}
+        openActivePage={toggleActivePage}
         options={mainInfoIncomes}
         title="Доходы"
         activePage="incomes"
       />
       <MainInfo
-        openActivePage={openActivePage}
+        openActivePage={toggleActivePage}
         options={mainInfoBalance}
         title="Баланс"
         activePage="balance"
       />
-      <StatisticsBtns />
+      <StatisticsBtns openActivePage={toggleActivePage} />
     </section>
   );
 };
