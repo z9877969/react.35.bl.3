@@ -1,6 +1,12 @@
 import LabelInput from "../LabelInput/LabelInput";
 
-const Form = ({ cbOnSubmit, formOptions, dataForm, handleChange }) => {
+const Form = ({
+  cbOnSubmit,
+  formOptions,
+  dataForm,
+  handleChange,
+  handleClick,
+}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     cbOnSubmit();
@@ -13,7 +19,8 @@ const Form = ({ cbOnSubmit, formOptions, dataForm, handleChange }) => {
           key={option.name}
           {...option}
           value={dataForm[option.name]}
-          cbOnChange={handleChange}
+          cbOnChange={option.type !== "button" ? handleChange : null}
+          cbOnClick={option.type === "button" ? handleClick : null}
         />
       ))}
     </form>
